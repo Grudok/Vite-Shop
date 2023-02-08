@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useLoginStore } from '../stores/login'
+
+const login = useLoginStore()
 
 </script>
 
@@ -12,9 +15,13 @@
                 <RouterLink class="pointer underline hover:uppercase" :to="{ name: 'Home' }">Home</RouterLink>
                 <RouterLink class="pointer underline hover:uppercase" :to="{ name: 'Profile' }">Profile</RouterLink>
                 <RouterLink class="pointer underline hover:uppercase" :to="{ name: 'Products' }">Products</RouterLink>
+                <RouterLink v-if="!login.loggedIn" class="pointer underline hover:uppercase" :to="{ name: 'SignUp' }">Sign-Up</RouterLink>
             </div>
             <div class="mr-10">
-                <RouterLink class="underline pointer hover:uppercase" :to="{ name: 'Login' }">Login</RouterLink>
+                <span v-if="login.loggedIn" class="px-2">{{"Hello, " + login.username }}</span>
+                <RouterLink v-if="!login.loggedIn" class="underline pointer hover:uppercase" :to="{ name: 'Login' }">Login</RouterLink>
+                <button v-else="" class="bg-red-300 border-2 border-red-500 hover:bg-red-700"
+                    @click="login.logout()">Logout</button>
             </div>
         </div>
     </nav>

@@ -6,6 +6,6 @@ export interface User {
     joinDate: string
     lastName: string
     level: string
-    userName: string
+    username: string
     isloggedin: boolean
 }
