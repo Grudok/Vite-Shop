@@ -8,31 +8,40 @@ const login = useLoginStore()
 const user = ref<User>()
 
 onMounted(async () => {
-        const response = await axios.get<User>(`http://localhost:3000/auth/profile/`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            }
-        })
-        user.value = response.data
-    }
+    const response = await axios.get<User>(`http://localhost:3000/auth/profile/`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        }
+    })
+    user.value = response.data
+}
 )
 
 </script>
 
 <template>
-    <div class="gap-5 bg-slate-200 px-4 py-12 border-black rounded w-full">
-        <div class="flex flex-col justify-center items-center">
-            <h2 class="text-2xl">Welcome {{user?.userName}}</h2>
-            <h3 class="text-xl">Email: {{user?.email}}</h3>
-            <h3 class="text-xl">Department: {{user?.department}}</h3>
-            <h3 class="text-xl">Join date: {{user?.joinDate}}</h3>
-            <h3 class="text-xl">Level: {{user?.level}}</h3>
-            <h3 class="text-xl">Firstname: {{user?.firstName}}</h3>
-            <h3 class="text-xl">Lastname: {{user?.lastName}}</h3>
-            <h3 class="text-xl">ID: {{user?.id}}</h3>
-            <button class="bg-red-300 border-2 border-red-500 w-44 p-2 hover:bg-red-700" @click="login.logout()">Logout</button>
+    <div class="flex justify-center items-center w-full gap-4">
+        <div class="rounded-lg bg-slate-200 px-4 py-12 gap-48">
+            <div class="grid grid-cols-1 gap-4 justify-between">
+                <h2 class="text-2xl px-4 uppercase">Welcome {{ user?.userName }}</h2>
+                <div class="px-8 py-4">
+                    <p class="mb-2"><span class="font-bold">Email:</span> {{ user?.email }}</p>
+                    <p class="mb-2"><span class="font-bold">Department:</span> {{ user?.department }}</p>
+                    <p class="mb-2"><span class="font-bold">Join-Date</span> {{ user?.joinDate }}</p>
+                    <p class="mb-2"><span class="font-bold">Level:</span> {{ user?.level }}</p>
+                    <p class="mb-2"><span class="font-bold">FirstName:</span> {{ user?.firstName }}</p>
+                    <p class="mb-2"><span class="font-bold">LastName:</span>{{ user?.lastName }}</p>
+                    <p class="mb-2"><span class="font-bold">ID:</span> {{ user?.id }}</p>
+                </div>
+            </div>
+            <div class="flex justify-center px-4 py-4">
+                <button class="bg-red-300 border-2 border-red-500 w-44 p-2 hover:bg-red-700"
+                    @click="login.logout()">Logout</button>
+            </div>
         </div>
     </div>
-        <RouterView></RouterView>
+    <RouterView></RouterView>
 </template>
-<style scoped></style>
+<style scoped>
+
+</style>
