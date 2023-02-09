@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { useLoginStore } from '../stores/login'
+import { useRouter } from 'vue-router'
 
 
 const login = useLoginStore()
+
+const sendToLoggin = () => {
+    const router = useRouter()
+    router.push({ name: 'Login' })
+}
+
 
 </script>
 
@@ -24,8 +31,10 @@ const login = useLoginStore()
                 <input class="border border-black rounded" type="password" id="password" v-model="login.passwordSign">
                 <label for="passwordRepeat">Repeat Password</label>
                 <input class="border border-black rounded" type="password" id="password" v-model="login.passwordSign">
-                <button type="submit" class="bg-green-300 border-2 border-green-400 w-44 py-4 px-4 gap-4 hover:bg-green-500">Sign-Up</button>
-                <button type="submit" class="bg-green-300 border-2 border-green-500 w-44 py-4 px-4 gap-4 hover:bg-green-700">Login in instead</button>
+                <button type="submit" 
+                class="bg-green-300 border-2 border-green-400 w-44 py-4 px-4 gap-4 hover:bg-green-500">Sign-Up</button>
+                <button type="submit" @click="sendToLoggin()" 
+                class="bg-green-300 border-2 border-green-500 w-44 py-4 px-4 gap-4 hover:bg-green-700">Login in instead</button>
             </div>
         </form>
     </div>
